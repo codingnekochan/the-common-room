@@ -1,2 +1,2 @@
 # the-common-room
-Exclusive clubhouse project from the odin syllabus using Node/Express, EJS, PassportJS and Postgress
+Exclusive clubhouse project from the odin syllabus using Node/Express, EJS for UI, PassportJS for authentication and Postgres for database
