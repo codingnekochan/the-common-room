@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join the Club — Secret Society of Strangers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <%- include('components/nav') %>
+
+    <main class="document">
+      <div class="crest">
+        <div class="crest__mark">SSS</div>
+        <h1 class="title">The Knock</h1>
+        <p class="subtitle">Speak the word and the door will know you</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <p style="line-height: 1.6; opacity: 0.85; margin-bottom: 28px">
+        You have crossed the threshold, but the inner rooms remain shut to you.
+        If you carry the word, the society will recognize you as one of its own.
+      </p>
+
+      <form id="join-form" novalidate>
+        <div class="field">
+          <label for="passcode">The word</label>
+          <input
+            type="password"
+            id="passcode"
+            name="passcode"
+            placeholder="&bull; &bull; &bull; &bull; &bull; &bull; &bull;"
+            autocomplete="off"
+            required
+          />
+          <p class="field-error" id="passcode-error">
+            The door does not recognize that word.
+          </p>
+        </div>
+
+        <div class="seal-button-row">
+          <button
+            type="submit"
+            class="seal-button"
+            aria-label="Submit the word"
+          >
+            Knock
+          </button>
+        </div>
+      </form>
+
+      <p class="footer-note">
+        Not yet ready?
+        <a href="/" class="text-link">Return to the Common Room</a>
+      </p>
+    </main>
+  </body>
+</html>

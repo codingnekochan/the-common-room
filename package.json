@@ -1,0 +1,22 @@
+{
+  "name": "The Common Room",
+  "author": {
+    "name": "Mimi",
+    "email": "codingnekochan@gmail.com"
+  },
+  "scripts": {
+    "watch": "node --env-file=.env --watch index.js",
+    "start": "node models/migrate.js && node index.js",
+    "migrate": "node --env-file=.env models/migrate.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-pg-simple": "^10.0.0",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.21.0"
+  }
+}

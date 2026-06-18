@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leave a Word — Secret Society of Strangers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <%- include('components/nav') %>
+    <main class="document">
+      <div class="crest">
+        <div class="crest__mark">SSS</div>
+        <h1 class="title">Leave a Word</h1>
+        <p class="subtitle">For those who come to the room after you</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <form id="post-form" novalidate>
+        <div class="field">
+          <label for="post-title">Subject</label>
+          <input
+            type="text"
+            id="post-title"
+            name="title"
+            placeholder="What is this concerning?"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="post-body">Your word</label>
+          <textarea
+            id="post-body"
+            name="body"
+            placeholder="Write what you came here to say..."
+            required
+          ></textarea>
+          <p class="field-hint">
+            Your name will be shown to fellow members, and sealed from all
+            others.
+          </p>
+        </div>
+
+        <div class="seal-button-row">
+          <button
+            type="submit"
+            class="seal-button"
+            aria-label="Leave this word"
+          >
+            Leave<br />Word
+          </button>
+        </div>
+      </form>
+
+      <p class="footer-note">
+        <a href="/" class="text-link"
+          >Return to the Common Room without posting</a
+        >
+      </p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enter — Secret Society of Strangers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="society-nav">
+      <span class="society-nav__brand">Secret Society of Strangers</span>
+    </nav>
+
+    <main class="document">
+      <div class="crest">
+        <div class="crest__mark">SSS</div>
+        <h1 class="title">At the Door</h1>
+        <p class="subtitle">State your name and passphrase</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="identifier">Name or correspondence address</label>
+          <input
+            type="text"
+            id="identifier"
+            name="identifier"
+            placeholder="Your chosen name or email"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="password">Passphrase</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Your passphrase"
+            autocomplete="current-password"
+            required
+          />
+          <p class="field-error" id="login-error">
+            That name and passphrase do not match our records.
+          </p>
+        </div>
+
+        <div class="seal-button-row">
+          <button
+            type="submit"
+            class="seal-button"
+            aria-label="Enter the society"
+          >
+            Enter
+          </button>
+        </div>
+      </form>
+
+      <p class="footer-note">
+        New to these halls?
+        <a href="/signup" class="text-link">Apply for entry</a>
+      </p>
+    </main>
+  </body>
+</html>

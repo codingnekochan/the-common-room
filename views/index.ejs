@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Common Room — Secret Society of Strangers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <%- include('components/nav') %>
+    <main class="document">
+      <div class="board-header">
+        <h1 class="title">The Common Room</h1>
+        <a href="/new" class="compose-link">Leave a Word</a>
+      </div>
+      <p class="subtitle" style="margin-bottom: 8px">
+        Words left by those who have passed through
+      </p>
+
+      <!--
+      LOGIC NOTE (remove this comment in the real templated version):
+      Swap the banner below between guest / member states depending on req.user.
+      .status-banner            → logged in, not a member
+      .status-banner--member    → logged in member or admin
+      Omit entirely when logged out.
+    -->
+      <span class=" status-banner status-banner--member">&#10046; Recognized Member</span>
+
+      <div class="divider"></div>
+
+      <ul class="entry-list">
+        <li class="entry">
+          <div class="entry__meta">
+            <span class="entry__author">M. Faircloth</span>
+            <span aria-hidden="true">&middot;</span>
+            <time datetime="2026-06-14">14 June 1826</time>
+          </div>
+          <h2 class="entry__title">On the Matter of the Third Floor</h2>
+          <p class="entry__body">
+            Let it be known that the door at the end of the corridor remains
+            locked for good reason. Those who ask twice will not be asked a
+            third time.
+          </p>
+          <button class="entry__delete" type="button">Remove</button>
+        </li>
+
+        <li class="entry">
+          <div class="entry__meta">
+            <span class="entry__author entry__author--sealed"
+              >Hidden Stranger</span
+            >
+            <span aria-hidden="true">&middot;</span>
+            <time datetime="2026-06-12">12 June 1826</time>
+          </div>
+          <h2 class="entry__title">A Warning, Kindly Meant</h2>
+          <p class="entry__body">
+            Not all who knock are friends. Verify the seal before you open. This
+            is the last courtesy I will extend on the subject.
+          </p>
+        </li>
+
+        <li class="entry">
+          <div class="entry__meta">
+            <span class="entry__author">R. Voss</span>
+            <span aria-hidden="true">&middot;</span>
+            <time datetime="2026-06-09">9 June 1826</time>
+          </div>
+          <h2 class="entry__title">Found: One Glove, Left Hand</h2>
+          <p class="entry__body">
+            Discovered beneath the reading table after Thursday's gathering.
+            Inquire with the steward if it belongs to you. No questions asked,
+            as is our custom.
+          </p>
+          <button class="entry__delete" type="button">Remove</button>
+        </li>
+      </ul>
+
+      <!--
+      Use this in place of .entry-list when there are no messages yet:
+      <div class="empty-state">No words have been left. Be the first to break the silence.</div>
+    --></main>
+  </body>
+</html>

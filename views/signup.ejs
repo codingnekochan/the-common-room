@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply for Entry — Secret Society of Strangers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="society-nav">
+      <span class="society-nav__brand">Secret Society of Strangers</span>
+    </nav>
+
+    <main class="document">
+      <div class="crest">
+        <div class="crest__mark">SSS</div>
+        <h1 class="title">Apply for Entry</h1>
+        <p class="subtitle">Every stranger begins unverified</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <form id="signup-form" novalidate>
+        <div class="field">
+          <label for="username">Chosen name</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="How shall we address you?"
+            autocomplete="username"
+            required
+          />
+          <p class="field-error" id="username-error">
+            This name is already claimed by another stranger.
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="email">Correspondence address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@somewhere.org"
+            autocomplete="email"
+            required
+          />
+          <p class="field-error" id="email-error">
+            That address has already applied for entry.
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="password">Passphrase</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="At least 8 characters"
+            autocomplete="new-password"
+            required
+            minlength="8"
+          />
+          <p class="field-hint">
+            Eight characters or more. Choose something no stranger could guess.
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="confirm-password">Confirm passphrase</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            placeholder="Repeat your passphrase"
+            autocomplete="new-password"
+            required
+            minlength="8"
+          />
+          <p class="field-error" id="confirm-error">
+            The passphrases do not match.
+          </p>
+        </div>
+
+        <div class="seal-button-row">
+          <button
+            type="submit"
+            class="seal-button"
+            aria-label="Submit application"
+          >
+            Submit<br />Application
+          </button>
+        </div>
+      </form>
+
+      <p class="footer-note">
+        Already a stranger here?
+        <a href="/login" class="text-link">Enter through the front door</a>
+      </p>
+    </main>
+  </body>
+</html>
