@@ -13,7 +13,6 @@ const validatePostContent = [
 
 const getPosts = async (req, res) => {
   const posts = await PostService.getAllPosts();
-  console.log(posts, "posts");
   res.render("index", { posts });
 };
 const getPostForm = (req, res) => {

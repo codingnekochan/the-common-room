@@ -20,14 +20,12 @@ const createTables = `
 `;
 
 async function main() {
-  console.log("creating DB tables");
   const client = new Client({
     connectionString: process.env.CONNECTION_STRING,
   });
   await client.connect();
   await client.query(createTables);
   await client.end();
-  console.log("done");
 }
 
 main();

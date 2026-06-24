@@ -6,9 +6,9 @@
   },
   "scripts": {
     "watch": "node --env-file=.env --watch index.js",
-    "migrate": "psql the_common_room  < node_modules/connect-pg-simple/table.sql && node models/migrate.js",
+    "migrate:neon": "psql \"postgresql://neondb_owner:npg_Le9ka1EPXNru@ep-green-king-aih7ycu2.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require\" < node_modules/connect-pg-simple/table.sql && node --env-file=.env models/migrate.js",
     "start": "node index.js",
-    "migrate:dev": "node --env-file=.env models/migrate.js"
+    "migrate:dev": "psql the_common_room  < node_modules/connect-pg-simple/table.sql && node --env-file=.env models/migrate.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

@@ -24,7 +24,6 @@ class PostService {
         ON p.author_id = u.id;
     `;
     const { rows } = await pool.query(query);
-    console.log(rows, "rows");
     return rows;
   }
 }

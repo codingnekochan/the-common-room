@@ -25,7 +25,6 @@ const validateNewUser = [
   body("confirmPassword")
     .trim()
     .custom((val, { req }) => {
-      console.log({ val, req: req.body }, "confirm password express validator");
       if (!val) throw new Error("Please confirm your password");
 
       if (val != req.body.password) {
@@ -79,7 +78,6 @@ const signup = [
         res.redirect("/");
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   },
