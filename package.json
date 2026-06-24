@@ -6,8 +6,9 @@
   },
   "scripts": {
     "watch": "node --env-file=.env --watch index.js",
-    "start": "node models/migrate.js && node index.js",
-    "migrate": "node --env-file=.env models/migrate.js"
+    "migrate": "psql the_common_room  < node_modules/connect-pg-simple/table.sql && node models/migrate.js",
+    "start": "node index.js",
+    "migrate:dev": "node --env-file=.env models/migrate.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

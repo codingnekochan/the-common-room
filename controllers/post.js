@@ -1,5 +1,6 @@
-const { body, matchedData } = require("express-validator");
+const { body, matchedData ,validationResult} = require("express-validator");
 const PostService = require("../models/posts");
+const { mapError } = require("../middlewares/error");
 
 const validatePostContent = [
   body("title").trim().notEmpty().withMessage("Subject is required"),
@@ -19,7 +20,9 @@ const getPostForm = (req, res) => {
   if (req.isUnauthenticated()) {
     return res.redirect("/login");
   }
-  return res.render("new-post", { error: null });
+  const error = req.session.postError;
+  delete req.session.postError;
+  return res.render("new-post", { error });
 };
 
 const createPost = [
@@ -28,9 +31,8 @@ const createPost = [
     try {
       const result = validationResult(req);
       if (!result.isEmpty()) {
-        return res.render("new-post", {
-          error: mapError(result),
-        });
+        req.session.postError = mapError(result);
+        return res.redirect("/new");
       }
       const author_id = req.user.id;
       const { title, body } = matchedData(req);

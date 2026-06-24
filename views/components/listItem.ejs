@@ -7,7 +7,11 @@
          <span class="entry__author entry__author--sealed">Hidden Stranger</span>
       <% } %>
       <span aria-hidden="true">&middot;</span>
+        <% if (user && (user.isAdmin || user.isMember)) { %>
       <time datetime="<%= post.created_at %>"><%= post.created_at.toLocaleDateString("en-GB", {year:"numeric", month:"long", day: "numeric"}) %></time>
+      <% } else { %>
+         <span class="entry__author entry__author--sealed">Hidden Stranger</span>
+      <% } %>
     </div>
     <h2 class="entry__title"><%= post.title %></h2>
     <p class="entry__body">

@@ -6,6 +6,6 @@ const mapError = (errorArray) => {
   return errorArray
     .array()
     .map((item) => item.msg)
-    .join("");
+    .join(". ");
 };
 module.exports = { globalErrorHandler, mapError };

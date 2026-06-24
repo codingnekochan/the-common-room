@@ -24,16 +24,18 @@ passport.use(
       try {
         const user = await UserService.findUserByEmail(email);
         if (!user) {
-          return done(null, false);
+          return done(null, false, {
+            message: "This email does not exist in our records",
+          });
         }
         const isValid = await validatePassword(password, user.hash);
-        console.log(isValid, "password validity");
         if (!isValid) {
-          return done(null, false);
+          return done(null, false, {
+            message: "You have entered the incorrect passphrase",
+          });
         }
         return done(null, user);
       } catch (error) {
-        console.log(error, "error authencating");
         done(error);
       }
     },

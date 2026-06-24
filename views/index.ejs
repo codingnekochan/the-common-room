@@ -11,7 +11,9 @@
     <main class="document">
       <div class="board-header">
         <h1 class="title">The Common Room</h1>
-        <a href="/new" class="compose-link">Leave a Word</a>
+        <% if (user) { %>
+          <a href="/new" class="compose-link">Leave a Word</a>
+        <% } %>
       </div>
       <p class="subtitle" style="margin-bottom: 8px">
         Words left by those who have passed through

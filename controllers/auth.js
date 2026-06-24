@@ -1,6 +1,6 @@
 const { body, validationResult, matchedData } = require("express-validator");
 const UserService = require("../models/users");
-const { generateHash } = require("../middlewares/auth");
+const { generateHash, validatePassword } = require("../middlewares/auth");
 const { passport } = require("../middlewares/passport");
 const { mapError } = require("../middlewares/error");
 
@@ -10,13 +10,18 @@ const validateNewUser = [
     .trim()
     .notEmpty()
     .isEmail()
+    .withMessage("Invalid Email Address")
     .custom(async (val) => {
       const existingUser = await UserService.findUserByEmail(val);
       if (existingUser) {
         throw new Error("E-mail already in use");
       }
     }),
-  body("password").trim().notEmpty().isLength({ min: 8 }),
+  body("password")
+    .trim()
+    .notEmpty()
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters"),
   body("confirmPassword")
     .trim()
     .custom((val, { req }) => {
@@ -34,19 +39,26 @@ const validateReturningUser = [
     .trim()
     .notEmpty()
     .isEmail()
+    .withMessage("Invalid Email Address")
     .custom(async (val) => {
       const existingUser = await UserService.findUserByEmail(val);
       if (!existingUser) {
         throw new Error("User does not exist");
       }
     }),
-  body("password").trim().notEmpty().isLength({ min: 8 }),
+  body("password")
+    .trim()
+    .notEmpty()
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters"),
 ];
 const validateClubPasscode = [
   body("passcode").trim().notEmpty().withMessage("Enter a valid passcode"),
 ];
 const getSignUpForm = (req, res) => {
-  res.render("signup", { error: null });
+  const error = req.session.authError;
+  delete req.session.authError;
+  res.render("signup", { error });
 };
 const signup = [
   validateNewUser,
@@ -54,9 +66,8 @@ const signup = [
     try {
       const result = validationResult(req);
       if (!result.isEmpty()) {
-        return res.render("signup", {
-          error: mapError(result)
-        });
+        req.session.authError = mapError(result);
+        return res.redirect("/signup");
       }
       const { username, email, password } = matchedData(req);
       const hash = await generateHash(password);
@@ -75,16 +86,32 @@ const signup = [
 ];
 
 const getLoginForm = (req, res) => {
-  res.render("login", { error: null });
+  const error = req.session.authError;
+  delete req.session.authError;
+  res.render("login", { error });
 };
 
 const login = [
   validateReturningUser,
   (req, res, next) => {
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/login",
-      failureMessage: "Failed to gain entry",
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+      req.session.authError = mapError(result);
+      return res.redirect("/login");
+    }
+    passport.authenticate("local", (err, user, info) => {
+      if (err) next(err);
+      if (!user) {
+        req.session.authError =
+          info?.message ?? "That name and passphrase do not match our records";
+        return res.redirect("/login");
+      }
+      req.login(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/");
+      });
     })(req, res, next);
   },
 ];
@@ -102,9 +129,11 @@ const logout = (req, res, next) => {
 
 const getClubForm = (req, res) => {
   if (req.isUnauthenticated()) {
-    return res.redirect("/login", { error: null });
+    return res.redirect("/login");
   }
-  return res.render("join", { error: null });
+  const error = req.session.authError;
+  delete req.session.authError;
+  return res.render("join", { error });
 };
 const joinClub = [
   validateClubPasscode,
@@ -115,7 +144,8 @@ const joinClub = [
         passcode !== process.env.ADMIN_PASSCODE &&
         passcode !== process.env.MEMBER_PASSCODE
       ) {
-        return res.render("join", { error: "Invalid passcode" });
+        req.session.authError = "Invalid passcode";
+        return res.redirect("/join");
       }
       if (passcode === process.env.MEMBER_PASSCODE) {
         await UserService.updateUserToMember(req.user.id);

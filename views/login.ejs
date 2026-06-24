@@ -9,6 +9,7 @@
   <body>
     <nav class="society-nav">
       <span class="society-nav__brand">Secret Society of Strangers</span>
+      <div class="society-nav__links"><a class="society-nav__link" href="/">Common Room</a></div>
     </nav>
     <% if (error) { %>
       <div class="toast toast--error" role="alert"><%= error %></div>
@@ -26,7 +27,7 @@
         <div class="field">
           <label for="identifier">Correspondence address</label>
           <input
-            type="text"
+            type="email"
             id="identifier"
             name="email"
             placeholder="Your chosen email"
