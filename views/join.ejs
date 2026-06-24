@@ -8,7 +8,9 @@
   </head>
   <body>
     <%- include('components/nav') %>
-
+    <% if (error) { %>
+      <div class="toast toast--error" role="alert"><%= error %></div>
+    <% } %>
     <main class="document">
       <div class="crest">
         <div class="crest__mark">SSS</div>
@@ -23,7 +25,7 @@
         If you carry the word, the society will recognize you as one of its own.
       </p>
 
-      <form id="join-form" novalidate>
+      <form id="join-form" method="post" action="/join">
         <div class="field">
           <label for="passcode">The word</label>
           <input

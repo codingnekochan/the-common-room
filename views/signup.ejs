@@ -10,7 +10,9 @@
     <nav class="society-nav">
       <span class="society-nav__brand">Secret Society of Strangers</span>
     </nav>
-
+    <% if (error) { %>
+      <div class="toast toast--error" role="alert"><%= error %></div>
+    <% } %>
     <main class="document">
       <div class="crest">
         <div class="crest__mark">SSS</div>
@@ -20,7 +22,7 @@
 
       <div class="divider"></div>
 
-      <form id="signup-form" novalidate>
+      <form id="signup-form" action="/signup" method="post">
         <div class="field">
           <label for="username">Chosen name</label>
           <input
@@ -68,11 +70,11 @@
         </div>
 
         <div class="field">
-          <label for="confirm-password">Confirm passphrase</label>
+          <label for="confirmPassword">Confirm passphrase</label>
           <input
             type="password"
             id="confirm-password"
-            name="confirm-password"
+            name="confirmPassword"
             placeholder="Repeat your passphrase"
             autocomplete="new-password"
             required

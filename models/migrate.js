@@ -7,7 +7,7 @@ const createTables = `
         email TEXT UNIQUE NOT NULL,
         hash TEXT NOT NULL,
         isAdmin BOOLEAN DEFAULT false,
-        isMember BOOLEAN  DEFAULT false,
+        isMember BOOLEAN DEFAULT false
     );
 
     CREATE TABLE IF NOT EXISTS posts(
@@ -29,3 +29,5 @@ async function main() {
   await client.end();
   console.log("done");
 }
+
+main();

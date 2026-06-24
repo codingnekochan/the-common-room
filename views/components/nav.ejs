@@ -1,15 +1,24 @@
+<form id="logout-form" method="post" action="/logout"></form> 
 <nav class="society-nav">
   <span class="society-nav__brand">Secret Society of Strangers</span>
   <div class="society-nav__links">
-  <div class="society-nav__links">  
+  <div class="society-nav__links">
     <a class="society-nav__link" href="/" <% currentPath === '/' ? 'aria-current="page"' : '' %>>Common Room</a>
-    <a class="society-nav__link" href="/join" <% currentPath === '/join' ? 'aria-current="page"' : '' %>>Join the Club</a>
+    <% if (user && !user.isAdmin && !user.isMember) { %>
+         <a class="society-nav__link" href="/join" <% currentPath === '/join' ? 'aria-current="page"' : '' %>>Join the Club</a>
+    <% } %>
     <a class="society-nav__link" href="/new" <% currentPath === '/new' ? 'aria-current="page"' : '' %>>Leave a Word</a>
-    <a class="society-nav__link" href="/login" <% currentPath === '/login' ? 'aria-current="page"' : '' %>>Log In</a>
-    <a class="society-nav__link" href="/logout" <% currentPath === '/logout' ? 'aria-current="page"' : '' %>>Log Out</a>
+    <% if (user) { %>
+        <button form="logout-form" class="log_out">
+            <p  class="society-nav__link">LOG OUT</p>
+        </button>
+    <% } else { %>
+            <a class="society-nav__link" href="/login" <% currentPath === '/login' ? 'aria-current="page"' : '' %>>Log In</a>
+        <% } %>
   </div>
   </div>
 </nav>
+
 
 <!-- <script defer>
   document.querySelectorAll(".society-nav__link").forEach((item) => {

@@ -1,0 +1,20 @@
+  <li class="entry">
+    <form action="/post/<%= post.id %>" method="post">
+    <div class="entry__meta">
+      <% if (user && (user.isAdmin || user.isMember)) { %>
+           <span class="entry__author"><%= post.author %></span>
+      <% } else { %>
+         <span class="entry__author entry__author--sealed">Hidden Stranger</span>
+      <% } %>
+      <span aria-hidden="true">&middot;</span>
+      <time datetime="<%= post.created_at %>"><%= post.created_at.toLocaleDateString("en-GB", {year:"numeric", month:"long", day: "numeric"}) %></time>
+    </div>
+    <h2 class="entry__title"><%= post.title %></h2>
+    <p class="entry__body">
+     <%= post.body %>
+    </p>
+    <% if (user && user.isAdmin) { %>
+       <button class="entry__delete" type="submit">Remove</button>
+    <% } %>
+    </form>
+  </li>

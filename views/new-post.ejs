@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+
     <%- include('components/nav') %>
+    <% if (error) { %>
+      <div class="toast toast--error" role="alert"><%= error %></div>
+    <% } %>
     <main class="document">
       <div class="crest">
         <div class="crest__mark">SSS</div>
@@ -17,7 +21,7 @@
 
       <div class="divider"></div>
 
-      <form id="post-form" novalidate>
+      <form id="post-form" method="post" action="/new">
         <div class="field">
           <label for="post-title">Subject</label>
           <input
